@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A244d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sleep-->
+        <scene sceneID="hNz-n2-bh7">
+            <objects>
+                <viewController id="9pv-A4-QxB" customClass="SleepViewController" customModule="SleepStats" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
+                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBh-fu-OxZ">
+                                <rect key="frame" x="40" y="330" width="520" height="60"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="jk9-dX-9qB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Go to sleep...">
+                                    <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sleepButtonPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="pg5-an-lbc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to set your alarm!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9l-He-eMu">
+                                <rect key="frame" x="40" y="52" width="520" height="22"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gep-ZL-vLi" customClass="ColoredDatePicker" customModule="SleepStats" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="96" width="600" height="216"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="vdY-8N-Whd"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="461008734.56149697">
+                                    <!--2015-08-11 17:58:54 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gep-ZL-vLi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-20" id="0ON-qp-Agw"/>
+                            <constraint firstItem="Gep-ZL-vLi" firstAttribute="top" secondItem="p9l-He-eMu" secondAttribute="bottom" constant="22" id="4I7-7F-71q"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="8Ex-oX-dWy"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="top" secondItem="Gep-ZL-vLi" secondAttribute="bottom" constant="18" id="8vV-MO-MlL"/>
+                            <constraint firstItem="p9l-He-eMu" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="Hbh-Yh-DPL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KBh-fu-OxZ" secondAttribute="trailing" constant="20" id="LMt-xg-C6A"/>
+                            <constraint firstItem="p9l-He-eMu" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="32" id="MZh-vw-sIO"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="top" secondItem="Gep-ZL-vLi" secondAttribute="bottom" constant="18" id="Usb-1X-fhJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gep-ZL-vLi" secondAttribute="trailing" constant="-20" id="V5U-dJ-XfX"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="abj-CA-dli"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KBh-fu-OxZ" secondAttribute="trailing" constant="20" id="cpN-Us-yFf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="p9l-He-eMu" secondAttribute="trailing" constant="20" id="sbf-dn-VYR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KBh-fu-OxZ" secondAttribute="trailing" constant="20" id="v0d-hu-gQ3"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="vL3-ap-SpY"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="zH7-F9-hbD"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Sleep" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="alarmPicker" destination="Gep-ZL-vLi" id="mMB-DV-zba"/>
+                        <outlet property="sleepButton" destination="KBh-fu-OxZ" id="lIz-qV-9za"/>
+                        <outlet property="topLabel" destination="p9l-He-eMu" id="k3J-O0-Cuq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-320"/>
+        </scene>
+        <!--Stats-->
+        <scene sceneID="wg7-f3-ORb">
+            <objects>
+                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="SleepStats" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Stats" image="second" id="cPa-gy-q4n"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="360"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="yl2-sM-qoP">
+            <objects>
+                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
+    </resources>
+</document>
