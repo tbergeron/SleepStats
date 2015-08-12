@@ -67,11 +67,9 @@ class SleepViewController: UIViewController {
     }
     
     func userDidWakeUp() {
+        print("userDidWakeUp called")
         self.refreshView()
         
-        self.alarm.cancelAlarm()
-        
-        print("wowowowo")
         // todo: save sleep log
         // todo: show night summary / message
     }

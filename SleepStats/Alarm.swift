@@ -52,22 +52,20 @@ class Alarm : NSObject {
     }
     
     func startAlarm(date: NSDate) {
-        if let date = self.getAlarmDate() {
-            // creating notifications for alarm
-            // todo: build a subclass for notifications
-            let notification: UILocalNotification = UILocalNotification()
-            notification.alertAction = "SleepStats"
-            notification.alertBody = "Wake up!"
-            notification.soundName = UILocalNotificationDefaultSoundName
-            notification.timeZone = NSTimeZone.defaultTimeZone()
-            notification.fireDate = NSDate(timeIntervalSinceNow: 120)
+        // creating notifications for alarm
+        // todo: build a subclass for notifications
+        let notification: UILocalNotification = UILocalNotification()
+        notification.alertAction = "SleepStats"
+        notification.alertBody = "Wake up!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.timeZone = NSTimeZone.defaultTimeZone()
+        notification.fireDate = NSDate(timeIntervalSinceNow: 30)
 //            notification.fireDate = date
-            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
 
-            // save alarm state
-            defaults.setBool(true, forKey: alarmStateKey)
-            self.saveAlarmDate(notification.fireDate!)
-        }
+        // save alarm state
+        defaults.setBool(true, forKey: alarmStateKey)
+        self.saveAlarmDate(notification.fireDate!)
     }
     
     func cancelAlarm() {
@@ -78,12 +76,25 @@ class Alarm : NSObject {
     }
     
     func userDidSnooze() {
-        // todo: cancel notifications and add 15 minutes to current alarm
         print("snoozing")
+        let currentAlarmDate = self.getAlarmDate()
+        
+        let components: NSDateComponents = NSDateComponents()
+        components.setValue(10, forComponent: NSCalendarUnit.Second);
+
+        let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate!, options: NSCalendarOptions(rawValue: 0))!
+
+        // renewing alarm
+        // todo: how to track time properly? 
+        // todo: implementing sleeplog objects?
+        self.cancelAlarm()
+        self.startAlarm(newAlarmDate)
     }
     
     // getting fired when app is opened and notification is fired
     func alarmDidFire() {
+        print("alarmDidFire called")
+
         // todo: play sound or something?
         let wakeUpAction = UIAlertAction(title: "Wake Up", style: .Cancel) { (action) in
             // shuts the alarm off

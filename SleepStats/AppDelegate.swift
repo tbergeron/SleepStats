@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Alarm: \(alarmDate)")
 
                     if NSDate().compare(alarmDate) == NSComparisonResult.OrderedDescending {
-                        print("AlarmDidFire Called")
                         NSNotificationCenter.defaultCenter().postNotificationName("AlarmDidFire", object: self)
                     }
                     
