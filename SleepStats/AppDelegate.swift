@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         application.applicationIconBadgeNumber = 0
+        
+        print("didReceiveLocalNotification called")
 
         // calling observer from Alarm class
         NSNotificationCenter.defaultCenter().postNotificationName("AlarmDidFire", object: self)
@@ -57,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Alarm: \(alarmDate)")
 
                     if NSDate().compare(alarmDate) == NSComparisonResult.OrderedDescending {
+                        print("applicationDidBecomeActive called AlarmDidFire")
                         NSNotificationCenter.defaultCenter().postNotificationName("AlarmDidFire", object: self)
                     }
                     

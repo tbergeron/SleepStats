@@ -21,23 +21,6 @@ class Alarm : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alarmDidFire", name: "AlarmDidFire", object: nil)
     }
     
-    func saveAlarmDate(date: NSDate) {
-        var alarmDate = date
-        
-        // if time is before current time: use tomorrow
-        // i.e. now: 2pm, alarm 5am (alarm is tomorrow)
-//        if alarmDate.timeIntervalSinceNow < 0.0 {
-//            // setting alarm same time, tomorrow
-//            let components: NSDateComponents = NSDateComponents()
-//            components.setValue(1, forComponent: NSCalendarUnit.Day);
-//            alarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))!
-//        }
-        
-        print(alarmDate)
-        
-        defaults.setObject(alarmDate, forKey: lastAlarmDateKey)
-    }
-    
     func getAlarmDate() -> NSDate? {
         if let date = defaults.objectForKey(lastAlarmDateKey) {
             return date as? NSDate
@@ -53,12 +36,31 @@ class Alarm : NSObject {
     }
     
     func startAlarm(date: NSDate) {
-        // creating notifications for alarm
-        let notification = self.notificationHandler.scheduleNotification("SleepStats", body: "Wake Up!", date: NSDate(timeIntervalSinceNow: 15))
-
         // save alarm state
         defaults.setBool(true, forKey: alarmStateKey)
-        self.saveAlarmDate(notification.fireDate!)
+        let alarmDate = self.saveAlarmDate(date)
+
+        // creating notifications for alarm
+        self.notificationHandler.scheduleNotification("SleepStats", body: "Wake Up!", date: alarmDate)
+    }
+    
+    func saveAlarmDate(date: NSDate) -> NSDate {
+        var alarmDate = date
+        
+        // if time is before current time: use tomorrow
+        // i.e. now: 2pm, alarm 5am (alarm is tomorrow)
+        if NSDate().compare(alarmDate) == NSComparisonResult.OrderedDescending {
+            // setting alarm same time, tomorrow
+            let components: NSDateComponents = NSDateComponents()
+            components.setValue(1, forComponent: NSCalendarUnit.Day);
+            alarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))!
+        }
+        
+        print("Alarm SET: \(alarmDate)")
+        
+        defaults.setObject(alarmDate, forKey: lastAlarmDateKey)
+        
+        return alarmDate
     }
     
     func cancelAlarm() {
@@ -69,7 +71,6 @@ class Alarm : NSObject {
     }
     
     func userDidSnooze() {
-        print("snoozing")
         let currentAlarmDate = self.getAlarmDate()
         
         // adding 15 minutes to current alarm
@@ -78,6 +79,8 @@ class Alarm : NSObject {
         components.setValue(15, forComponent: NSCalendarUnit.Minute);
 
         let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate!, options: NSCalendarOptions(rawValue: 0))!
+
+        print("Alarm SNOOZED: \(newAlarmDate)")
 
         // todo: how to track time properly?
         // todo: implementing sleeplog objects?

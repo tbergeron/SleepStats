@@ -61,10 +61,8 @@ class SleepViewController: UIViewController {
                 alarmPicker.setDate(NSDate(), animated: false)
             }
             
-            // setting back last alarm
-            if let date = alarm.getAlarmDate() {
-                alarmPicker.setDate(date, animated: false)
-            }
+//            // setting to current time
+//            alarmPicker.setDate(date, animated: false)
         }
     }
     
