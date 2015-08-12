@@ -51,17 +51,19 @@ class SleepViewController: UIViewController {
     
     func refreshView() {      
         if let enabled = self.alarm.isEnabled() {
+            // switching labels
             if enabled {
+                topLabel.text = "Good night!"
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
-                
-                // setting back last alarm
-                if let date = alarm.getAlarmDate() {
-                    alarmPicker.setDate(date, animated: false)
-                }
-                
             } else {
+                topLabel.text = "Don't forget to set your alarm!"
                 sleepButton.setTitle("Go to sleep...", forState: UIControlState.Normal)
                 alarmPicker.setDate(NSDate(), animated: false)
+            }
+            
+            // setting back last alarm
+            if let date = alarm.getAlarmDate() {
+                alarmPicker.setDate(date, animated: false)
             }
         }
     }
