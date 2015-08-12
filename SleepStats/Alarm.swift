@@ -15,6 +15,7 @@ class Alarm : NSObject {
     let alarmStateKey = "IsAlarmActive"
 
     let defaults = NSUserDefaults.standardUserDefaults()
+    let notificationHandler = NotificationHandler()
     
     func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alarmDidFire", name: "AlarmDidFire", object: nil)
@@ -53,15 +54,7 @@ class Alarm : NSObject {
     
     func startAlarm(date: NSDate) {
         // creating notifications for alarm
-        // todo: build a subclass for notifications
-        let notification: UILocalNotification = UILocalNotification()
-        notification.alertAction = "SleepStats"
-        notification.alertBody = "Wake up!"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.fireDate = NSDate(timeIntervalSinceNow: 30)
-//            notification.fireDate = date
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        let notification = self.notificationHandler.scheduleNotification("SleepStats", body: "Wake Up!", date: NSDate(timeIntervalSinceNow: 15))
 
         // save alarm state
         defaults.setBool(true, forKey: alarmStateKey)
@@ -79,14 +72,17 @@ class Alarm : NSObject {
         print("snoozing")
         let currentAlarmDate = self.getAlarmDate()
         
+        // adding 15 minutes to current alarm
+        // todo: option for snooze delay? 15/30mins etc
         let components: NSDateComponents = NSDateComponents()
-        components.setValue(10, forComponent: NSCalendarUnit.Second);
+        components.setValue(15, forComponent: NSCalendarUnit.Minute);
 
         let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate!, options: NSCalendarOptions(rawValue: 0))!
 
-        // renewing alarm
-        // todo: how to track time properly? 
+        // todo: how to track time properly?
         // todo: implementing sleeplog objects?
+
+        // renewing alarm
         self.cancelAlarm()
         self.startAlarm(newAlarmDate)
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FB2D41CD1B7A85F000467132 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D41CC1B7A85F000467132 /* Alarm.swift */; };
+		FB4FF28B1B7BB64E00504493 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */; };
 		FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */; };
 		FB51F1C91B76F59E000A7BC6 /* SleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */; };
 		FB51F1CB1B76F59E000A7BC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */; };
@@ -19,15 +20,16 @@
 
 /* Begin PBXFileReference section */
 		FB2D41CC1B7A85F000467132 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		FB51F1C31B76F59E000A7BC6 /* SleepStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SleepStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SleepStats/AppDelegate.swift; sourceTree = "<group>"; };
+		FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewController.swift; sourceTree = "<group>"; };
-		FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = SleepStats/SecondViewController.swift; sourceTree = "<group>"; };
+		FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		FB51F1CD1B76F59E000A7BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB51F1CF1B76F59E000A7BC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB51F1D21B76F59E000A7BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB51F1D41B76F59E000A7BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColoredDatePicker.swift; path = SleepStats/ColoredDatePicker.swift; sourceTree = "<group>"; };
+		FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredDatePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				FB51F1C51B76F59E000A7BC6 /* SleepStats */,
-				FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */,
-				FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */,
-				FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */,
 				FB51F1C41B76F59E000A7BC6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,6 +84,10 @@
 				FB2D41CC1B7A85F000467132 /* Alarm.swift */,
 				FB2D41CB1B7A7F9000467132 /* Storyboards */,
 				FB2D41CA1B7A7F8600467132 /* Stuff */,
+				FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */,
+				FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */,
+				FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */,
+				FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */,
 			);
 			path = SleepStats;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				FB51F1CB1B76F59E000A7BC6 /* SecondViewController.swift in Sources */,
 				FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */,
 				FB2D41CD1B7A85F000467132 /* Alarm.swift in Sources */,
+				FB4FF28B1B7BB64E00504493 /* NotificationHandler.swift in Sources */,
 				FB7788961B7A728100A95EB0 /* ColoredDatePicker.swift in Sources */,
 				FB51F1C91B76F59E000A7BC6 /* SleepViewController.swift in Sources */,
 			);
