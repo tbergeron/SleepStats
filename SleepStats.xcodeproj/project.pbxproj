@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FB2D41CD1B7A85F000467132 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D41CC1B7A85F000467132 /* Alarm.swift */; };
 		FB4FF28B1B7BB64E00504493 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */; };
+		FB4FF28D1B7BBEE500504493 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = FB4FF28C1B7BBEE500504493 /* alarm.caf */; };
 		FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */; };
 		FB51F1C91B76F59E000A7BC6 /* SleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */; };
 		FB51F1CB1B76F59E000A7BC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		FB2D41CC1B7A85F000467132 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		FB4FF28C1B7BBEE500504493 /* alarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.caf; sourceTree = "<group>"; };
 		FB51F1C31B76F59E000A7BC6 /* SleepStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SleepStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 		FB2D41CA1B7A7F8600467132 /* Stuff */ = {
 			isa = PBXGroup;
 			children = (
+				FB4FF28C1B7BBEE500504493 /* alarm.caf */,
 				FB51F1CF1B76F59E000A7BC6 /* Assets.xcassets */,
 				FB51F1D41B76F59E000A7BC6 /* Info.plist */,
 			);
@@ -152,6 +155,7 @@
 			files = (
 				FB51F1D31B76F59E000A7BC6 /* LaunchScreen.storyboard in Resources */,
 				FB51F1D01B76F59E000A7BC6 /* Assets.xcassets in Resources */,
+				FB4FF28D1B7BBEE500504493 /* alarm.caf in Resources */,
 				FB51F1CE1B76F59E000A7BC6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

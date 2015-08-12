@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class Alarm : NSObject {
 
@@ -16,7 +17,8 @@ class Alarm : NSObject {
 
     let defaults = NSUserDefaults.standardUserDefaults()
     let notificationHandler = NotificationHandler()
-    
+    var player: AVAudioPlayer?
+
     func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alarmDidFire", name: "AlarmDidFire", object: nil)
     }
@@ -24,6 +26,17 @@ class Alarm : NSObject {
     func getAlarmDate() -> NSDate? {
         if let date = defaults.objectForKey(lastAlarmDateKey) {
             return date as? NSDate
+        }
+        return nil
+    }
+    
+    func getHumanFormattedAlarmDate() -> String? {
+        if let date = defaults.objectForKey(lastAlarmDateKey) {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
+            dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
+            let formattedDate = dateFormatter.stringFromDate(date as! NSDate)
+            return formattedDate
         }
         return nil
     }
@@ -56,6 +69,8 @@ class Alarm : NSObject {
             alarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))!
         }
         
+        // todo: flat seconds so it rings right on the minute
+        
         print("Alarm SET: \(alarmDate)")
         
         defaults.setObject(alarmDate, forKey: lastAlarmDateKey)
@@ -76,7 +91,7 @@ class Alarm : NSObject {
         // adding 15 minutes to current alarm
         // todo: option for snooze delay? 15/30mins etc
         let components: NSDateComponents = NSDateComponents()
-        components.setValue(15, forComponent: NSCalendarUnit.Minute);
+        components.setValue(15, forComponent: NSCalendarUnit.Second);
 
         let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate!, options: NSCalendarOptions(rawValue: 0))!
 
@@ -94,24 +109,37 @@ class Alarm : NSObject {
     func alarmDidFire() {
         print("alarmDidFire called")
 
-        // todo: play sound or something?
+        // play sound or something
+        // todo: put that somewhere else (soundmanager class?)
+        let soundUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "caf")!)
+        do {
+            self.player = try AVAudioPlayer(contentsOfURL: soundUrl)
+            self.player?.prepareToPlay()
+        } catch {
+            print(error)
+        }
+        self.player?.play()
+        
         let wakeUpAction = UIAlertAction(title: "Wake Up", style: .Cancel) { (action) in
             // shuts the alarm off
             self.cancelAlarm()
             // tells the SleepViewController that the user woke up
             NSNotificationCenter.defaultCenter().postNotificationName("UserDidWakeUp", object: self)
+            // stop sound after prompt
+            self.player?.stop()
         }
         
         let snoozeAction = UIAlertAction(title: "Snooze", style: .Destructive) { (action) in
             self.userDidSnooze()
+            // stop sound after prompt
+            self.player?.stop()
         }
         
-        let alertController = UIAlertController(title: "Wow!", message: "TABARNAK ÇA MARCHE?!", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Wow!", message: "Time to wake up!", preferredStyle: .Alert)
         alertController.addAction(wakeUpAction)
         alertController.addAction(snoozeAction)
         
         UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(alertController, animated: true) {
-
         }
     }
     

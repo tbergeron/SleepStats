@@ -15,7 +15,7 @@ class NotificationHandler {
         let notification: UILocalNotification = UILocalNotification()
         notification.alertAction = action
         notification.alertBody = body
-        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.soundName = "alarm.caf"
         notification.timeZone = NSTimeZone.defaultTimeZone()
         notification.fireDate = date
         UIApplication.sharedApplication().scheduleLocalNotification(notification)

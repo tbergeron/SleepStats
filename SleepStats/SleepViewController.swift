@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SleepViewController: UIViewController {
     @IBOutlet weak var topLabel: UILabel!
@@ -14,18 +15,6 @@ class SleepViewController: UIViewController {
     @IBOutlet weak var sleepButton: UIButton!
     
     let alarm : Alarm = Alarm()
-    
-    @IBAction func sleepButtonPressed(sender: AnyObject) {
-        if let enabled = self.alarm.isEnabled() {
-            if enabled {
-                self.alarm.cancelAlarm()
-            } else {
-                self.alarm.startAlarm(alarmPicker.date)
-            }
-        }
-
-        self.refreshView()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +42,15 @@ class SleepViewController: UIViewController {
         if let enabled = self.alarm.isEnabled() {
             // switching labels
             if enabled {
-                topLabel.text = "Good night!"
+                alarmPicker.hidden = true
+                topLabel.text = "Good night!\nAlarm is set for \(self.alarm.getHumanFormattedAlarmDate()!)"
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
             } else {
+                alarmPicker.hidden = false
                 topLabel.text = "Don't forget to set your alarm!"
                 sleepButton.setTitle("Go to sleep...", forState: UIControlState.Normal)
                 alarmPicker.setDate(NSDate(), animated: false)
             }
-            
-//            // setting to current time
-//            alarmPicker.setDate(date, animated: false)
         }
     }
     
@@ -74,5 +62,17 @@ class SleepViewController: UIViewController {
         // todo: show night summary / message
     }
 
+    @IBAction func sleepButtonPressed(sender: AnyObject) {
+        if let enabled = self.alarm.isEnabled() {
+            if enabled {
+                self.alarm.cancelAlarm()
+            } else {
+                self.alarm.startAlarm(NSDate(timeIntervalSinceNow: 15))
+//                self.alarm.startAlarm(alarmPicker.date)
+            }
+        }
+        
+        self.refreshView()
+    }
 }
 
