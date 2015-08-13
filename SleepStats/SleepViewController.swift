@@ -44,18 +44,24 @@ class SleepViewController: UIViewController {
             // switching labels
             if enabled {
                 if let sleepLog = self.alarm.getCurrentSleepLog() {
-                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.getHumanFormattedAlarmDate())"
+                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.getNextHumanFormattedAlarmTime())"
                 }
                 
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
                 alarmPicker.hidden = true
+                
                 // todo: fade background?
-//                self.view.backgroundColor = UIColor(red: 0, green: 64, blue: 128)
+                // self.view.backgroundColor = UIColor(red: 0, green: 64, blue: 128)
             } else {
                 topLabel.text = "Don't forget to set your alarm!"
                 sleepButton.setTitle("Go to sleep...", forState: UIControlState.Normal)
                 alarmPicker.hidden = false
-                alarmPicker.setDate(NSDate(), animated: false)
+                
+                // now + 5 mins
+                let components: NSDateComponents = NSDateComponents()
+                components.setValue(5, forComponent: NSCalendarUnit.Minute);
+                let pickerDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))!
+                alarmPicker.setDate(pickerDate, animated: false)
             }
         }
     }
@@ -65,8 +71,12 @@ class SleepViewController: UIViewController {
         self.refreshView()
         
         let sleepLog = self.alarm.getCurrentSleepLog()
+        print("startDate: \(sleepLog?.startDate)")
+        print("alarmDate: \(sleepLog?.alarmDate)")
+        print("snoozeDate: \(sleepLog?.snoozeDate)")
+        print("duration: \(sleepLog?.duration?.description)")
+        
         // todo: where to save sleep logs?
-        // todo: show night summary / message
     }
     
     func needRefreshView() {
@@ -77,10 +87,10 @@ class SleepViewController: UIViewController {
     @IBAction func sleepButtonPressed(sender: AnyObject) {
         if let enabled = self.alarm.isEnabled() {
             if enabled {
-                self.alarm.stopAlarm()
+                self.alarm.userDidWakeUp()
             } else {
-                self.alarm.startAlarm(NSDate(timeIntervalSinceNow: 15))
-//                self.alarm.startAlarm(alarmPicker.date)
+                // self.alarm.startAlarm(NSDate(timeIntervalSinceNow: 15))
+                self.alarm.startAlarm(alarmPicker.date)
             }
         }
         
