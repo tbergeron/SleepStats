@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-class Alarm : NSObject {
+class AlarmHandler : NSObject {
 
     let alarmStateKey = "IsAlarmActive"
     let currentSleepLogKey = "CurrentSleepLog"
 
     let defaults = NSUserDefaults.standardUserDefaults()
     let notificationHandler = NotificationHandler()
-    let soundManager = SoundManager()
+    let soundHandler = SoundHandler()
     
     func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alarmDidFire", name: "AlarmDidFire", object: nil)
@@ -72,7 +72,7 @@ class Alarm : NSObject {
     
     func stopAlarm() {
         // stop sound
-        self.soundManager.stop()
+        self.soundHandler.stop()
         // cancel all notifications
         self.notificationHandler.cancelNotifications()
         // save alarm state
@@ -85,7 +85,7 @@ class Alarm : NSObject {
         
         // play sound or something
         // todo: preference for alarm sounds
-        self.soundManager.play("alarm")
+        self.soundHandler.play("alarm")
         
         let wakeUpAction = UIAlertAction(title: "Wake Up", style: .Cancel) { (action) in
             self.userDidWakeUp()
@@ -116,7 +116,7 @@ class Alarm : NSObject {
 
     func userDidSnooze() {
         // stop sound
-        self.soundManager.stop()
+        self.soundHandler.stop()
 
         if let sleepLog = self.getCurrentSleepLog() {
             var currentAlarmDate = sleepLog.alarmDate

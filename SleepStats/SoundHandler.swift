@@ -1,5 +1,5 @@
 //
-//  SoundManager.swift
+//  SoundHandler.swift
 //  SleepStats
 //
 //  Created by Tommy Bergeron on 2015-08-12.
@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class SoundManager {
+class SoundHandler {
     
     var player: AVAudioPlayer?
 

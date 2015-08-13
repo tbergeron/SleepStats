@@ -49,13 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         // firing alarm event on start if due (usually coming from local notification)
-        let alarm = Alarm()
-        if let enabled = alarm.isEnabled() {
+        let alarmHandler = AlarmHandler()
+        if let enabled = alarmHandler.isEnabled() {
             print("IsEnabled? \(String(enabled))")
             print("  Now: \(NSDate())")
 
             if enabled {
-                if let sleepLog = alarm.getCurrentSleepLog() {
+                if let sleepLog = alarmHandler.getCurrentSleepLog() {
                     print("Alarm: \(sleepLog.alarmDate)")
 
                     if NSDate().compare(sleepLog.alarmDate) == NSComparisonResult.OrderedDescending {

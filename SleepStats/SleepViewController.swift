@@ -14,7 +14,7 @@ class SleepViewController: UIViewController {
     @IBOutlet weak var alarmPicker: ColoredDatePicker!
     @IBOutlet weak var sleepButton: UIButton!
     
-    let alarm : Alarm = Alarm()
+    let alarmHandler : AlarmHandler = AlarmHandler()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class SleepViewController: UIViewController {
         // register observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidWakeUp", name: "UserDidWakeUp", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "needRefreshView", name: "NeedRefreshView", object: nil)
-        alarm.registerObservers()
+        self.alarmHandler.registerObservers()
         
         // rounded button
         sleepButton.layer.cornerRadius = 3
@@ -40,10 +40,10 @@ class SleepViewController: UIViewController {
     }
     
     func refreshView() {      
-        if let enabled = self.alarm.isEnabled() {
+        if let enabled = self.alarmHandler.isEnabled() {
             // switching labels
             if enabled {
-                if let sleepLog = self.alarm.getCurrentSleepLog() {
+                if let sleepLog = self.alarmHandler.getCurrentSleepLog() {
                     topLabel.text = "Good night!\nAlarm is set for \(sleepLog.getNextHumanFormattedAlarmTime())"
                 }
                 
@@ -70,7 +70,7 @@ class SleepViewController: UIViewController {
         print("userDidWakeUp called")
         self.refreshView()
         
-        let sleepLog = self.alarm.getCurrentSleepLog()
+        let sleepLog = self.alarmHandler.getCurrentSleepLog()
         print("startDate: \(sleepLog?.startDate)")
         print("alarmDate: \(sleepLog?.alarmDate)")
         print("snoozeDate: \(sleepLog?.snoozeDate)")
@@ -85,12 +85,12 @@ class SleepViewController: UIViewController {
     }
 
     @IBAction func sleepButtonPressed(sender: AnyObject) {
-        if let enabled = self.alarm.isEnabled() {
+        if let enabled = self.alarmHandler.isEnabled() {
             if enabled {
-                self.alarm.userDidWakeUp()
+                self.alarmHandler.userDidWakeUp()
             } else {
-                // self.alarm.startAlarm(NSDate(timeIntervalSinceNow: 15))
-                self.alarm.startAlarm(alarmPicker.date)
+                // self.alarmHandler.startAlarm(NSDate(timeIntervalSinceNow: 15))
+                self.alarmHandler.startAlarm(alarmPicker.date)
             }
         }
         
