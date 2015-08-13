@@ -12,6 +12,7 @@ class SleepLog : NSObject, NSCoding {
     
     var startDate: NSDate                   // when the user goes to sleep
     var alarmDate: NSDate                   // original alarm
+    var snoozeDate: NSDate? = nil           // original alarm + snoozes
     var wakeUpDate: NSDate? = nil           // time at which user has actually woken up
     var duration: NSTimeInterval? = nil     // duration in seconds of sleep
     
@@ -23,6 +24,7 @@ class SleepLog : NSObject, NSCoding {
     required init(coder aDecoder: NSCoder) {
         self.startDate = (aDecoder.decodeObjectForKey("startDate") as? NSDate)!
         self.alarmDate = (aDecoder.decodeObjectForKey("alarmDate") as? NSDate)!
+        self.snoozeDate = aDecoder.decodeObjectForKey("snoozeDate") as? NSDate
         self.wakeUpDate = aDecoder.decodeObjectForKey("wakeUpDate") as? NSDate
         self.duration = aDecoder.decodeObjectForKey("duration") as? NSTimeInterval
     }
@@ -35,6 +37,10 @@ class SleepLog : NSObject, NSCoding {
             aCoder.encodeObject(wakeUpDate, forKey: "wakeUpDate")
         }
         
+        if let snoozeDate = self.snoozeDate {
+            aCoder.encodeObject(snoozeDate, forKey: "snoozeDate")
+        }
+        
         if let duration = self.duration {
             aCoder.encodeObject(duration, forKey: "wakeUpDate")
         }
@@ -44,6 +50,20 @@ class SleepLog : NSObject, NSCoding {
         // saving actual wake up time and duration
         self.wakeUpDate = NSDate()
         self.duration = self.startDate.timeIntervalSinceDate(self.wakeUpDate!)
+    }
+    
+    func userSnoozed(newDate: NSDate) {
+        self.snoozeDate = newDate
+    }
+    
+    func getHumanFormattedAlarmDate() -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        
+        let formattedDate = dateFormatter.stringFromDate(self.alarmDate)
+        
+        return formattedDate
     }
     
 }

@@ -55,10 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("  Now: \(NSDate())")
 
             if enabled {
-                if let alarmDate = alarm.getAlarmDate() {
-                    print("Alarm: \(alarmDate)")
+                if let sleepLog = alarm.getCurrentSleepLog() {
+                    print("Alarm: \(sleepLog.alarmDate)")
 
-                    if NSDate().compare(alarmDate) == NSComparisonResult.OrderedDescending {
+                    if NSDate().compare(sleepLog.alarmDate) == NSComparisonResult.OrderedDescending {
                         print("applicationDidBecomeActive called AlarmDidFire")
                         NSNotificationCenter.defaultCenter().postNotificationName("AlarmDidFire", object: self)
                     }

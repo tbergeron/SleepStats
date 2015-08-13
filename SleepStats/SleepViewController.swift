@@ -43,7 +43,10 @@ class SleepViewController: UIViewController {
         if let enabled = self.alarm.isEnabled() {
             // switching labels
             if enabled {
-                topLabel.text = "Good night!\nAlarm is set for \(self.alarm.getHumanFormattedAlarmDate()!)"
+                if let sleepLog = self.alarm.getCurrentSleepLog() {
+                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.getHumanFormattedAlarmDate())"
+                }
+                
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
                 alarmPicker.hidden = true
                 // todo: fade background?
@@ -61,9 +64,9 @@ class SleepViewController: UIViewController {
         print("userDidWakeUp called")
         self.refreshView()
         
-        // todo: save sleep log
-        // todo: show night summary / message
         let sleepLog = self.alarm.getCurrentSleepLog()
+        // todo: where to save sleep logs?
+        // todo: show night summary / message
     }
     
     func needRefreshView() {
@@ -74,7 +77,7 @@ class SleepViewController: UIViewController {
     @IBAction func sleepButtonPressed(sender: AnyObject) {
         if let enabled = self.alarm.isEnabled() {
             if enabled {
-                self.alarm.cancelAlarm()
+                self.alarm.stopAlarm()
             } else {
                 self.alarm.startAlarm(NSDate(timeIntervalSinceNow: 15))
 //                self.alarm.startAlarm(alarmPicker.date)

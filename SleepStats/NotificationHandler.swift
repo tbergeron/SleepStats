@@ -23,4 +23,8 @@ class NotificationHandler {
         return notification
     }
     
+    func cancelNotifications() {
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+    }
+    
 }

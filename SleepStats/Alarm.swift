@@ -35,26 +35,6 @@ class Alarm : NSObject {
         let archivedObject = NSKeyedArchiver.archivedDataWithRootObject(sleepLog)
         defaults.setObject(archivedObject, forKey: currentSleepLogKey)
     }
-
-    func getAlarmDate() -> NSDate? {
-        if let sleepLog = self.getCurrentSleepLog() {
-            return sleepLog.alarmDate
-        }
-        return nil
-    }
-    
-    func getHumanFormattedAlarmDate() -> String? {
-        if let sleepLog = self.getCurrentSleepLog() {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
-            dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-
-            let formattedDate = dateFormatter.stringFromDate(sleepLog.alarmDate)
-            
-            return formattedDate
-        }
-        return nil
-    }
     
     func isEnabled() -> Bool? {
         if let enabled : Bool = defaults.boolForKey(alarmStateKey) {
@@ -63,29 +43,8 @@ class Alarm : NSObject {
         return nil
     }
     
-    // todo: this method sure looks like shit
     func startAlarm(date: NSDate) {
-        // save alarm state
-        defaults.setBool(true, forKey: alarmStateKey)
-        let alarmDate = self.saveAlarmDate(date)
-        self.createNotification(alarmDate)
-    }
-    
-    func cancelAlarm() {
-        // cancel all notifications
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        // save alarm state
-        defaults.setBool(false, forKey: alarmStateKey)
-    }
-
-    func createNotification(alarmDate: NSDate) {
-        // creating notifications for alarm
-        self.notificationHandler.scheduleNotification("SleepStats", body: "Wake Up!", date: alarmDate)
-    }
-    
-    func saveAlarmDate(date: NSDate) -> NSDate {
         var alarmDate = date
-        
         // if time is before current time: use tomorrow
         // i.e. now: 2pm, alarm 5am (alarm is tomorrow)
         if NSDate().compare(alarmDate) == NSComparisonResult.OrderedDescending {
@@ -102,7 +61,22 @@ class Alarm : NSObject {
         let sleepLog = SleepLog(startDate: NSDate(), alarmDate: alarmDate)
         self.saveCurrentSleepLog(sleepLog)
         
-        return alarmDate
+        // create local notification
+        self.createNotification(alarmDate)
+        // enable alarm
+        defaults.setBool(true, forKey: alarmStateKey)
+    }
+    
+    func stopAlarm() {
+        // cancel all notifications
+        self.notificationHandler.cancelNotifications()
+        // save alarm state
+        defaults.setBool(false, forKey: alarmStateKey)
+    }
+
+    func createNotification(alarmDate: NSDate) {
+        // creating notifications for alarm
+        self.notificationHandler.scheduleNotification("SleepStats", body: "Wake Up!", date: alarmDate)
     }
     
     func userDidSnooze() {
@@ -118,15 +92,12 @@ class Alarm : NSObject {
             
             print("Alarm SNOOZED: \(newAlarmDate)")
             
-            // renewing alarm
-            // todo: keep track of original alarm time
-            sleepLog.alarmDate = newAlarmDate
+            // updating sleeplog
+            sleepLog.userSnoozed(newAlarmDate)
             self.saveCurrentSleepLog(sleepLog)
-
-            // todo: make this clearer
-            self.cancelAlarm()
-            defaults.setBool(true, forKey: alarmStateKey)
-
+            
+            // recreating updated local notification
+            self.notificationHandler.cancelNotifications()
             self.createNotification(newAlarmDate)
             
             NSNotificationCenter.defaultCenter().postNotificationName("NeedRefreshView", object: self)
@@ -143,7 +114,7 @@ class Alarm : NSObject {
         
         let wakeUpAction = UIAlertAction(title: "Wake Up", style: .Cancel) { (action) in
             // shuts the alarm off
-            self.cancelAlarm()
+            self.stopAlarm()
             // tells the SleepViewController that the user woke up
             NSNotificationCenter.defaultCenter().postNotificationName("UserDidWakeUp", object: self)
             // stop sound after prompt
