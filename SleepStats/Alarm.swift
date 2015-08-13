@@ -8,34 +8,49 @@
 
 import Foundation
 import UIKit
-import AVFoundation
 
 class Alarm : NSObject {
 
-    let lastAlarmDateKey = "LastAlarmDate"
     let alarmStateKey = "IsAlarmActive"
+    let currentSleepLogKey = "CurrentSleepLog"
 
     let defaults = NSUserDefaults.standardUserDefaults()
     let notificationHandler = NotificationHandler()
-    var player: AVAudioPlayer?
-
+    let soundManager = SoundManager()
+    
     func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alarmDidFire", name: "AlarmDidFire", object: nil)
     }
     
+    func getCurrentSleepLog() -> SleepLog? {
+        if let archivedObject = defaults.objectForKey(currentSleepLogKey) {
+            let sleepLog = NSKeyedUnarchiver.unarchiveObjectWithData(archivedObject as! NSData) as? SleepLog
+            return sleepLog
+        }
+        
+        return nil
+    }
+    
+    func saveCurrentSleepLog(sleepLog: SleepLog) {
+        let archivedObject = NSKeyedArchiver.archivedDataWithRootObject(sleepLog)
+        defaults.setObject(archivedObject, forKey: currentSleepLogKey)
+    }
+
     func getAlarmDate() -> NSDate? {
-        if let date = defaults.objectForKey(lastAlarmDateKey) {
-            return date as? NSDate
+        if let sleepLog = self.getCurrentSleepLog() {
+            return sleepLog.alarmDate
         }
         return nil
     }
     
     func getHumanFormattedAlarmDate() -> String? {
-        if let date = defaults.objectForKey(lastAlarmDateKey) {
+        if let sleepLog = self.getCurrentSleepLog() {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
-            dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
-            let formattedDate = dateFormatter.stringFromDate(date as! NSDate)
+            dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+
+            let formattedDate = dateFormatter.stringFromDate(sleepLog.alarmDate)
+            
             return formattedDate
         }
         return nil
@@ -48,11 +63,22 @@ class Alarm : NSObject {
         return nil
     }
     
+    // todo: this method sure looks like shit
     func startAlarm(date: NSDate) {
         // save alarm state
         defaults.setBool(true, forKey: alarmStateKey)
         let alarmDate = self.saveAlarmDate(date)
+        self.createNotification(alarmDate)
+    }
+    
+    func cancelAlarm() {
+        // cancel all notifications
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        // save alarm state
+        defaults.setBool(false, forKey: alarmStateKey)
+    }
 
+    func createNotification(alarmDate: NSDate) {
         // creating notifications for alarm
         self.notificationHandler.scheduleNotification("SleepStats", body: "Wake Up!", date: alarmDate)
     }
@@ -73,36 +99,38 @@ class Alarm : NSObject {
         
         print("Alarm SET: \(alarmDate)")
         
-        defaults.setObject(alarmDate, forKey: lastAlarmDateKey)
+        let sleepLog = SleepLog(startDate: NSDate(), alarmDate: alarmDate)
+        self.saveCurrentSleepLog(sleepLog)
         
         return alarmDate
     }
     
-    func cancelAlarm() {
-        // cancel all notifications
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        // save alarm state
-        defaults.setBool(false, forKey: alarmStateKey)
-    }
-    
     func userDidSnooze() {
-        let currentAlarmDate = self.getAlarmDate()
-        
-        // adding 15 minutes to current alarm
-        // todo: option for snooze delay? 15/30mins etc
-        let components: NSDateComponents = NSDateComponents()
-        components.setValue(15, forComponent: NSCalendarUnit.Second);
+        if let sleepLog = self.getCurrentSleepLog() {
+            let currentAlarmDate = sleepLog.alarmDate
+            
+            // adding 15 minutes to current alarm
+            // todo: option for snooze delay? 15/30mins etc
+            let components: NSDateComponents = NSDateComponents()
+            components.setValue(15, forComponent: NSCalendarUnit.Second);
+            
+            let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate, options: NSCalendarOptions(rawValue: 0))!
+            
+            print("Alarm SNOOZED: \(newAlarmDate)")
+            
+            // renewing alarm
+            // todo: keep track of original alarm time
+            sleepLog.alarmDate = newAlarmDate
+            self.saveCurrentSleepLog(sleepLog)
 
-        let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate!, options: NSCalendarOptions(rawValue: 0))!
+            // todo: make this clearer
+            self.cancelAlarm()
+            defaults.setBool(true, forKey: alarmStateKey)
 
-        print("Alarm SNOOZED: \(newAlarmDate)")
-
-        // todo: how to track time properly?
-        // todo: implementing sleeplog objects?
-
-        // renewing alarm
-        self.cancelAlarm()
-        self.startAlarm(newAlarmDate)
+            self.createNotification(newAlarmDate)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("NeedRefreshView", object: self)
+        }
     }
     
     // getting fired when app is opened and notification is fired
@@ -110,15 +138,8 @@ class Alarm : NSObject {
         print("alarmDidFire called")
 
         // play sound or something
-        // todo: put that somewhere else (soundmanager class?)
-        let soundUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "caf")!)
-        do {
-            self.player = try AVAudioPlayer(contentsOfURL: soundUrl)
-            self.player?.prepareToPlay()
-        } catch {
-            print(error)
-        }
-        self.player?.play()
+        // todo: preference for alarm sounds
+        self.soundManager.play("alarm")
         
         let wakeUpAction = UIAlertAction(title: "Wake Up", style: .Cancel) { (action) in
             // shuts the alarm off
@@ -126,13 +147,13 @@ class Alarm : NSObject {
             // tells the SleepViewController that the user woke up
             NSNotificationCenter.defaultCenter().postNotificationName("UserDidWakeUp", object: self)
             // stop sound after prompt
-            self.player?.stop()
+            self.soundManager.stop()
         }
         
         let snoozeAction = UIAlertAction(title: "Snooze", style: .Destructive) { (action) in
             self.userDidSnooze()
             // stop sound after prompt
-            self.player?.stop()
+            self.soundManager.stop()
         }
         
         let alertController = UIAlertController(title: "Wow!", message: "Time to wake up!", preferredStyle: .Alert)

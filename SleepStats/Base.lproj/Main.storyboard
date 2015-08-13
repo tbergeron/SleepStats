@@ -32,15 +32,8 @@
                                     <action selector="sleepButtonPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="pg5-an-lbc"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to set your alarm! Don't forget to set your alarm! Don't forget to set your alarm! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9l-He-eMu">
-                                <rect key="frame" x="40" y="52" width="520" height="100"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gep-ZL-vLi" customClass="ColoredDatePicker" customModule="SleepStats" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="168" width="600" height="216"/>
+                                <rect key="frame" x="0.0" y="163" width="600" height="216"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="vdY-8N-Whd"/>
@@ -49,6 +42,13 @@
                                     <!--2015-08-11 17:58:54 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to set your alarm! Don't forget to set your alarm! Don't forget to set your alarm! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9l-He-eMu">
+                                <rect key="frame" x="40" y="52" width="520" height="43"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,11 +57,10 @@
                             <constraint firstItem="KBh-fu-OxZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="8Ex-oX-dWy"/>
                             <constraint firstItem="p9l-He-eMu" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="Hbh-Yh-DPL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KBh-fu-OxZ" secondAttribute="trailing" constant="20" id="LMt-xg-C6A"/>
-                            <constraint firstItem="p9l-He-eMu" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="32" id="MZh-vw-sIO"/>
-                            <constraint firstItem="Gep-ZL-vLi" firstAttribute="top" secondItem="p9l-He-eMu" secondAttribute="bottom" constant="16" id="Rwl-6Y-Jn8"/>
+                            <constraint firstItem="p9l-He-eMu" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="32" id="QKD-qc-PlA"/>
                             <constraint firstItem="Gep-ZL-vLi" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="Usx-yv-Has"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gep-ZL-vLi" secondAttribute="trailing" constant="-20" id="V5U-dJ-XfX"/>
-                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="top" secondItem="Gep-ZL-vLi" secondAttribute="bottom" constant="75" id="aGc-Gk-nb4"/>
+                            <constraint firstItem="KBh-fu-OxZ" firstAttribute="top" secondItem="Gep-ZL-vLi" secondAttribute="bottom" constant="80" id="aGc-Gk-nb4"/>
                             <constraint firstItem="KBh-fu-OxZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="abj-CA-dli"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KBh-fu-OxZ" secondAttribute="trailing" constant="20" id="cpN-Us-yFf"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="KBh-fu-OxZ" secondAttribute="bottom" constant="32" id="dya-8M-1hH"/>

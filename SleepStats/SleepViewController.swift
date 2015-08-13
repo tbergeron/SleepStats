@@ -21,6 +21,7 @@ class SleepViewController: UIViewController {
         
         // register observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidWakeUp", name: "UserDidWakeUp", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "needRefreshView", name: "NeedRefreshView", object: nil)
         alarm.registerObservers()
         
         // rounded button
@@ -42,13 +43,15 @@ class SleepViewController: UIViewController {
         if let enabled = self.alarm.isEnabled() {
             // switching labels
             if enabled {
-                alarmPicker.hidden = true
                 topLabel.text = "Good night!\nAlarm is set for \(self.alarm.getHumanFormattedAlarmDate()!)"
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
+                alarmPicker.hidden = true
+                // todo: fade background?
+//                self.view.backgroundColor = UIColor(red: 0, green: 64, blue: 128)
             } else {
-                alarmPicker.hidden = false
                 topLabel.text = "Don't forget to set your alarm!"
                 sleepButton.setTitle("Go to sleep...", forState: UIControlState.Normal)
+                alarmPicker.hidden = false
                 alarmPicker.setDate(NSDate(), animated: false)
             }
         }
@@ -60,6 +63,12 @@ class SleepViewController: UIViewController {
         
         // todo: save sleep log
         // todo: show night summary / message
+        let sleepLog = self.alarm.getCurrentSleepLog()
+    }
+    
+    func needRefreshView() {
+        print("needRefreshView called")
+        self.refreshView()
     }
 
     @IBAction func sleepButtonPressed(sender: AnyObject) {
