@@ -22,7 +22,7 @@ class SleepViewController: UIViewController {
             if enabled {
                 self.alarmHandler.userDidWakeUp()
             } else {
-                // self.alarmHandler.startAlarm(NSDate(timeIntervalSinceNow: 15))
+//                 self.alarmHandler.startAlarm(NSDate(timeIntervalSinceNow: 15))
                 self.alarmHandler.startAlarm(alarmPicker.date)
             }
         }
@@ -93,9 +93,9 @@ class SleepViewController: UIViewController {
         self.refreshView()
         
         if let sleepLog = self.alarmHandler.getCurrentSleepLog() {
-            print("startDate: \(sleepLog.startDate)")
-            print("alarmDate: \(sleepLog.alarmDate)")
-            print("snoozeDate: \(sleepLog.snoozeDate)")
+            print("startDate: \(sleepLog.startTime)")
+            print("alarmDate: \(sleepLog.alarmTime)")
+            print("snoozeDate: \(sleepLog.snoozeTime)")
             print("duration: \(sleepLog.duration)")
             
             sleepLog.save()

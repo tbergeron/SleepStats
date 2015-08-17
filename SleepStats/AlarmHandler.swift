@@ -62,13 +62,15 @@ class AlarmHandler : NSObject {
             alarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))!
         }
         
-        let sleepLog = SleepLog(startDate: NSDate(), alarmDate: alarmDate)
+        let sleepLog = SleepLog()
+        sleepLog.startTime = NSDate()
+        sleepLog.alarmTime = alarmDate
         self.saveCurrentSleepLog(sleepLog)
         
-        print("Alarm SET: \(sleepLog.alarmDate)")
+        print("Alarm SET: \(sleepLog.alarmTime)")
 
         // create local notification
-        self.createNotification(sleepLog.alarmDate)
+        self.createNotification(sleepLog.alarmTime)
         // enable alarm
         defaults.setBool(true, forKey: alarmStateKey)
     }
@@ -123,11 +125,11 @@ class AlarmHandler : NSObject {
         self.soundHandler.stop()
 
         if let sleepLog = self.getCurrentSleepLog() {
-            var currentAlarmDate = sleepLog.alarmDate
+            var currentAlarmDate = sleepLog.alarmTime
             
             // if already snoozed, use snoozeDate to add onto
-            if sleepLog.hasSnoozed {
-                currentAlarmDate = sleepLog.snoozeDate
+            if sleepLog.snoozed {
+                currentAlarmDate = sleepLog.snoozeTime
             }
             
             // adding 15 minutes to current alarm
@@ -141,7 +143,7 @@ class AlarmHandler : NSObject {
             sleepLog.userSnoozed(newAlarmDate)
             self.saveCurrentSleepLog(sleepLog)
 
-            print("Alarm SNOOZED: \(sleepLog.snoozeDate)")
+            print("Alarm SNOOZED: \(sleepLog.snoozeTime)")
             
             // recreating updated local notification
             self.notificationHandler.cancelNotifications()

@@ -13,11 +13,62 @@ class SleepLog : Object, NSCoding {
     
     // MARK: Model Properties
     
-    dynamic var startDate:  NSDate          // when the user goes to sleep
-    dynamic var alarmDate:  NSDate          // original alarm
-    dynamic var snoozeDate: NSDate          // original alarm + snoozes
-    dynamic var duration:   NSInteger = 0   // duration in seconds of sleep
-    dynamic var hasSnoozed: Bool = false    // has snoozed
+    dynamic private var startDate:  NSDate = NSDate()          // when the user goes to sleep
+    dynamic private var alarmDate:  NSDate = NSDate()          // original alarm
+    dynamic private var snoozeDate: NSDate = NSDate()          // original alarm + snoozes
+    dynamic private var durationInt:   NSInteger = 0   // duration in seconds of sleep
+    dynamic private var hasSnoozed: Bool = false    // has snoozed
+    
+    // todo: wake up date? no way to know if woke up before alarm
+    
+    override static func ignoredProperties() -> [String] {
+        return ["startTime", "alarmTime", "snoozeTime", "snoozed", "duration"]
+    }
+    
+    var startTime : NSDate {
+        get {
+            return self.startDate
+        }
+        set(date) {
+            self.startDate = date
+        }
+    }
+    
+    var alarmTime : NSDate {
+        get {
+            return self.alarmDate
+        }
+        set(date) {
+            self.alarmDate = date
+        }
+    }
+    
+    var snoozeTime : NSDate {
+        get {
+            return self.snoozeDate
+        }
+        set(date) {
+            self.snoozeDate = date
+        }
+    }
+    
+    var snoozed : Bool {
+        get {
+            return self.hasSnoozed
+        }
+        set(yesOrNo) {
+            self.hasSnoozed = yesOrNo
+        }
+    }
+    
+    var duration : Int {
+        get {
+            return self.durationInt
+        }
+        set(seconds) {
+            self.durationInt = seconds
+        }
+    }
     
     // MARK: Computed Properties
     
@@ -39,30 +90,18 @@ class SleepLog : Object, NSCoding {
     
     // MARK: Initializers
     
-    init(startDate: NSDate, alarmDate: NSDate) {
-        self.startDate = startDate
-        self.alarmDate = alarmDate.flatSeconds()
-        self.snoozeDate = NSDate()
-        
-        super.init()
-    }
-    
     required init(coder aDecoder: NSCoder) {
         self.startDate = (aDecoder.decodeObjectForKey("startDate") as? NSDate)!
         self.alarmDate = (aDecoder.decodeObjectForKey("alarmDate") as? NSDate)!
         self.hasSnoozed = (aDecoder.decodeObjectForKey("hasSnoozed") as? Bool)!
         self.snoozeDate = aDecoder.decodeObjectForKey("snoozeDate") as! NSDate
-        self.duration = aDecoder.decodeObjectForKey("duration") as! NSInteger
+        self.durationInt = aDecoder.decodeObjectForKey("duration") as! NSInteger
         
         super.init()
     }
 
     // todo: Realm makes this a realm fucking pain in the ass!!!
     required init() {
-        self.startDate = NSDate()
-        self.alarmDate = NSDate()
-        self.snoozeDate = NSDate()
-        
         super.init()
     }
     
@@ -95,6 +134,11 @@ class SleepLog : Object, NSCoding {
     }
     
     func save() {
+//        let realm = RLMRealm.defaultRealm() //3
+//        realm.beginWriteTransaction() //4
+//        realm.addObject(self)
+//        realm.commitWriteTransaction() // 7
+
         do {
             let realm = try Realm()
             

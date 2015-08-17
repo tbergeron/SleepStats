@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
         }
 
-        let alarmHandler = AlarmHandler()
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setBool(false, forKey: alarmHandler.alarmStateKey)
+//        let alarmHandler = AlarmHandler()
+//        
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        defaults.setBool(false, forKey: alarmHandler.alarmStateKey)
 
 //        let sleepLog = alarmHandler.getCurrentSleepLog()
 //        let enabled = alarmHandler.isEnabled()
@@ -65,9 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             if enabled {
                 if let sleepLog = alarmHandler.getCurrentSleepLog() {
-                    print("Alarm: \(sleepLog.alarmDate)")
+                    print("Alarm: \(sleepLog.alarmTime)")
 
-                    if NSDate().compare(sleepLog.alarmDate) == NSComparisonResult.OrderedDescending {
+                    if NSDate().compare(sleepLog.alarmTime) == NSComparisonResult.OrderedDescending {
                         print("applicationDidBecomeActive called AlarmDidFire")
                         NSNotificationCenter.defaultCenter().postNotificationName("AlarmDidFire", object: self)
                     }
