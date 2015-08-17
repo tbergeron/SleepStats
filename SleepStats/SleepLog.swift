@@ -13,17 +13,19 @@ class SleepLog : Object, NSCoding {
     
     // MARK: Model Properties
     
-    dynamic private var startDate:  NSDate = NSDate()          // when the user goes to sleep
-    dynamic private var alarmDate:  NSDate = NSDate()          // original alarm
-    dynamic private var snoozeDate: NSDate = NSDate()          // original alarm + snoozes
-    dynamic private var durationInt:   NSInteger = 0   // duration in seconds of sleep
-    dynamic private var hasSnoozed: Bool = false    // has snoozed
+    dynamic private var startDate:  NSDate = NSDate() // when the user goes to sleep
+    dynamic private var alarmDate:  NSDate = NSDate() // original alarm
+    dynamic private var snoozeDate: NSDate = NSDate() // original alarm + snoozes
+    dynamic private var durationInt:NSInteger = 0     // duration in seconds of sleep
+    dynamic private var hasSnoozed: Bool = false      // has snoozed
+    dynamic private var wokeUpDate: NSDate = NSDate() // date user ultimately woke up (woke up before alarm)
     
-    // todo: wake up date? no way to know if woke up before alarm
-    
+    // properties being ignored when Realm is saving
     override static func ignoredProperties() -> [String] {
-        return ["startTime", "alarmTime", "snoozeTime", "snoozed", "duration"]
+        return ["startTime", "alarmTime", "snoozeTime", "snoozed", "duration", "wokeUpTime"]
     }
+    
+    // MARK: Computed Properties
     
     var startTime : NSDate {
         get {
@@ -70,7 +72,14 @@ class SleepLog : Object, NSCoding {
         }
     }
     
-    // MARK: Computed Properties
+    var wokeUpTime : NSDate {
+        get {
+            return self.wokeUpDate
+        }
+        set(date) {
+            self.wokeUpDate = date
+        }
+    }
     
     var humanReadableAlarmTime : String {
         var nextTime = self.alarmDate
@@ -121,11 +130,11 @@ class SleepLog : Object, NSCoding {
         // saving duration based on snooze/alarm time
         if self.hasSnoozed {
             self.duration = NSInteger(self.snoozeDate.timeIntervalSinceDate(self.startDate))
-            
         } else {
             self.duration = NSInteger(self.alarmDate.timeIntervalSinceDate(self.startDate))
             
         }
+        self.wokeUpTime = NSDate()
     }
     
     func userSnoozed(newDate: NSDate) {
@@ -134,11 +143,6 @@ class SleepLog : Object, NSCoding {
     }
     
     func save() {
-//        let realm = RLMRealm.defaultRealm() //3
-//        realm.beginWriteTransaction() //4
-//        realm.addObject(self)
-//        realm.commitWriteTransaction() // 7
-
         do {
             let realm = try Realm()
             
