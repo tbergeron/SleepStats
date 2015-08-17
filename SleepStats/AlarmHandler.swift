@@ -11,6 +11,8 @@ import UIKit
 
 class AlarmHandler : NSObject {
 
+    // MARK: Properties
+    
     let alarmStateKey = "IsAlarmActive"
     let currentSleepLogKey = "CurrentSleepLog"
 
@@ -18,6 +20,7 @@ class AlarmHandler : NSObject {
     let notificationHandler = NotificationHandler()
     let soundHandler = SoundHandler()
     
+    // MARK: Class Methods
     func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alarmDidFire", name: "AlarmDidFire", object: nil)
     }
@@ -79,7 +82,8 @@ class AlarmHandler : NSObject {
         defaults.setBool(false, forKey: alarmStateKey)
     }
     
-    // getting fired when app is opened and notification is fired
+    // MARK: Events called by observers or elsewhere
+    
     func alarmDidFire() {
         print("alarmDidFire called")
         
@@ -122,8 +126,8 @@ class AlarmHandler : NSObject {
             var currentAlarmDate = sleepLog.alarmDate
             
             // if already snoozed, use snoozeDate to add onto
-            if let _ = sleepLog.snoozeDate {
-                currentAlarmDate = sleepLog.snoozeDate!
+            if sleepLog.hasSnoozed {
+                currentAlarmDate = sleepLog.snoozeDate
             }
             
             // adding 15 minutes to current alarm
@@ -137,7 +141,7 @@ class AlarmHandler : NSObject {
             sleepLog.userSnoozed(newAlarmDate)
             self.saveCurrentSleepLog(sleepLog)
 
-            print("Alarm SNOOZED: \(sleepLog.snoozeDate!)")
+            print("Alarm SNOOZED: \(sleepLog.snoozeDate)")
             
             // recreating updated local notification
             self.notificationHandler.cancelNotifications()

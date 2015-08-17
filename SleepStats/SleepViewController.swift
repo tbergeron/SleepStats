@@ -10,12 +10,32 @@ import UIKit
 import AVFoundation
 
 class SleepViewController: UIViewController {
+    
+    // MARK: Outlets & Actions
+    
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var alarmPicker: ColoredDatePicker!
     @IBOutlet weak var sleepButton: UIButton!
     
+    @IBAction func sleepButtonPressed(sender: AnyObject) {
+        if let enabled = self.alarmHandler.isEnabled() {
+            if enabled {
+                self.alarmHandler.userDidWakeUp()
+            } else {
+                // self.alarmHandler.startAlarm(NSDate(timeIntervalSinceNow: 15))
+                self.alarmHandler.startAlarm(alarmPicker.date)
+            }
+        }
+        
+        self.refreshView()
+    }
+    
+    // MARK: Properties
+    
     let alarmHandler : AlarmHandler = AlarmHandler()
 
+    // MARK: Overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,12 +59,14 @@ class SleepViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
     
-    func refreshView() {      
+    // MARK: Controller methods
+    
+    func refreshView() {
         if let enabled = self.alarmHandler.isEnabled() {
             // switching labels
             if enabled {
                 if let sleepLog = self.alarmHandler.getCurrentSleepLog() {
-                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.getNextHumanFormattedAlarmTime())"
+                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.humanReadableAlarmTime)"
                 }
                 
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
@@ -70,13 +92,14 @@ class SleepViewController: UIViewController {
         print("userDidWakeUp called")
         self.refreshView()
         
-        let sleepLog = self.alarmHandler.getCurrentSleepLog()
-        print("startDate: \(sleepLog?.startDate)")
-        print("alarmDate: \(sleepLog?.alarmDate)")
-        print("snoozeDate: \(sleepLog?.snoozeDate)")
-        print("duration: \(sleepLog?.duration?.description)")
-        
-        // todo: where to save sleep logs?
+        if let sleepLog = self.alarmHandler.getCurrentSleepLog() {
+            print("startDate: \(sleepLog.startDate)")
+            print("alarmDate: \(sleepLog.alarmDate)")
+            print("snoozeDate: \(sleepLog.snoozeDate)")
+            print("duration: \(sleepLog.duration)")
+            
+            sleepLog.save()
+        }
     }
     
     func needRefreshView() {
@@ -84,17 +107,5 @@ class SleepViewController: UIViewController {
         self.refreshView()
     }
 
-    @IBAction func sleepButtonPressed(sender: AnyObject) {
-        if let enabled = self.alarmHandler.isEnabled() {
-            if enabled {
-                self.alarmHandler.userDidWakeUp()
-            } else {
-                // self.alarmHandler.startAlarm(NSDate(timeIntervalSinceNow: 15))
-                self.alarmHandler.startAlarm(alarmPicker.date)
-            }
-        }
-        
-        self.refreshView()
-    }
 }
 

@@ -19,6 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
         }
 
+        let alarmHandler = AlarmHandler()
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(false, forKey: alarmHandler.alarmStateKey)
+
+//        let sleepLog = alarmHandler.getCurrentSleepLog()
+//        let enabled = alarmHandler.isEnabled()
+//        alarmHandler.startAlarm(NSDate())
+        
         return true
     }
     
