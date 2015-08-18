@@ -86,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
         </scene>
-        <!--Stats-->
+        <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="SleepStats" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,10 +97,31 @@
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ehn-U3-79A">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="fqD-i2-xIS"/>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="0hv-3I-9ue"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ehn-U3-79A" secondAttribute="trailing" constant="-20" id="TdI-1f-DYp"/>
+                            <constraint firstItem="ehn-U3-79A" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="W1c-v0-030"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ehn-U3-79A" secondAttribute="bottom" id="opA-Bn-bBK"/>
+                            <constraint firstItem="ehn-U3-79A" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="-20" id="pTr-GF-pwl"/>
+                            <constraint firstItem="ehn-U3-79A" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" id="sfg-ud-vea"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Stats" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="tableView" destination="ehn-U3-79A" id="1lV-7M-k8f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -129,6 +150,5 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
     </resources>
 </document>

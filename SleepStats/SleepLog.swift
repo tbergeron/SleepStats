@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Realm
 import RealmSwift
 
 class SleepLog : Object, NSCoding {
@@ -109,9 +110,13 @@ class SleepLog : Object, NSCoding {
         super.init()
     }
 
-    // todo: Realm makes this a realm fucking pain in the ass!!!
+
     required init() {
         super.init()
+    }
+
+    override init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
     }
     
     // MARK: NSCoding-related methods
