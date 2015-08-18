@@ -10,28 +10,24 @@ import UIKit
 import Realm
 import RealmSwift
 
-class Cell: UITableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
-        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
-    }
+class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-}
-
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    // MARK: Outlets & Actions
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: Properties
+
     let realm = try! Realm()
     let sleepLogs = try! Realm().objects(SleepLog).sorted("alarmDate", ascending: false)
     var notificationToken: NotificationToken?
 
+    // MARK: UIViewController Overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerClass(Cell.self, forCellReuseIdentifier: "cell")
+        tableView.registerClass(RecentTableViewCell.self, forCellReuseIdentifier: "cell")
         
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
@@ -49,12 +45,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: UITableView Methods
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sleepLogs.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! Cell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! RecentTableViewCell
 
         let object = sleepLogs[indexPath.row]
         cell.textLabel?.text = object.humanReadableAlarmTime
@@ -68,4 +66,3 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
 }
-

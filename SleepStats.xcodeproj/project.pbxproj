@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DC1BAE53468ABA8C6D2744FC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D21A4D95E76D82AA91EFFFD /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FB02623F1B7D3A4F007B1A43 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02623E1B7D3A4F007B1A43 /* NSDateExtension.swift */; };
+		FB1B33B61B83A3FE00D8E9F0 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1B33B51B83A3FE00D8E9F0 /* RecentTableViewCell.swift */; };
 		FB2D41CD1B7A85F000467132 /* AlarmHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2D41CC1B7A85F000467132 /* AlarmHandler.swift */; };
 		FB4FF28B1B7BB64E00504493 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */; };
 		FB4FF28D1B7BBEE500504493 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = FB4FF28C1B7BBEE500504493 /* alarm.caf */; };
@@ -17,7 +18,7 @@
 		FB4FF2931B7C472500504493 /* SleepLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4FF2921B7C472500504493 /* SleepLog.swift */; };
 		FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */; };
 		FB51F1C91B76F59E000A7BC6 /* SleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */; };
-		FB51F1CB1B76F59E000A7BC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */; };
+		FB51F1CB1B76F59E000A7BC6 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51F1CA1B76F59E000A7BC6 /* RecentViewController.swift */; };
 		FB51F1CE1B76F59E000A7BC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB51F1CC1B76F59E000A7BC6 /* Main.storyboard */; };
 		FB51F1D01B76F59E000A7BC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB51F1CF1B76F59E000A7BC6 /* Assets.xcassets */; };
 		FB51F1D31B76F59E000A7BC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB51F1D11B76F59E000A7BC6 /* LaunchScreen.storyboard */; };
@@ -30,6 +31,7 @@
 		A1124E13D23AF85495A12415 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FB02623E1B7D3A4F007B1A43 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = ../NSDateExtension.swift; sourceTree = "<group>"; };
 		FB062BD31B7E8ADD00F4FB73 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		FB1B33B51B83A3FE00D8E9F0 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		FB2D41CC1B7A85F000467132 /* AlarmHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmHandler.swift; sourceTree = "<group>"; };
 		FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		FB4FF28C1B7BBEE500504493 /* alarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.caf; sourceTree = "<group>"; };
@@ -39,7 +41,7 @@
 		FB51F1C31B76F59E000A7BC6 /* SleepStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SleepStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewController.swift; sourceTree = "<group>"; };
-		FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		FB51F1CA1B76F59E000A7BC6 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		FB51F1CD1B76F59E000A7BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB51F1CF1B76F59E000A7BC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB51F1D21B76F59E000A7BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,6 +78,45 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FB1B33B71B83A41C00D8E9F0 /* Custom Components */ = {
+			isa = PBXGroup;
+			children = (
+				FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */,
+				FB4FF28E1B7BE41300504493 /* UIColorExtension.swift */,
+				FB02623E1B7D3A4F007B1A43 /* NSDateExtension.swift */,
+				FB1B33B51B83A3FE00D8E9F0 /* RecentTableViewCell.swift */,
+			);
+			name = "Custom Components";
+			sourceTree = "<group>";
+		};
+		FB1B33B81B83A43300D8E9F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FB4FF2921B7C472500504493 /* SleepLog.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FB1B33B91B83A43A00D8E9F0 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				FB2D41CC1B7A85F000467132 /* AlarmHandler.swift */,
+				FB4FF2901B7C465D00504493 /* SoundHandler.swift */,
+				FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
+		FB1B33BA1B83A44000D8E9F0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */,
+				FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */,
+				FB51F1CA1B76F59E000A7BC6 /* RecentViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		FB2D41CA1B7A7F8600467132 /* Stuff */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,13 +127,13 @@
 			name = Stuff;
 			sourceTree = "<group>";
 		};
-		FB2D41CB1B7A7F9000467132 /* Storyboards */ = {
+		FB2D41CB1B7A7F9000467132 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				FB51F1CC1B76F59E000A7BC6 /* Main.storyboard */,
 				FB51F1D11B76F59E000A7BC6 /* LaunchScreen.storyboard */,
 			);
-			name = Storyboards;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		FB51F1BA1B76F59E000A7BC6 = {
@@ -117,18 +158,12 @@
 		FB51F1C51B76F59E000A7BC6 /* SleepStats */ = {
 			isa = PBXGroup;
 			children = (
-				FB51F1C61B76F59E000A7BC6 /* AppDelegate.swift */,
-				FB51F1C81B76F59E000A7BC6 /* SleepViewController.swift */,
-				FB51F1CA1B76F59E000A7BC6 /* SecondViewController.swift */,
-				FB2D41CC1B7A85F000467132 /* AlarmHandler.swift */,
-				FB4FF2901B7C465D00504493 /* SoundHandler.swift */,
-				FB4FF28A1B7BB64E00504493 /* NotificationHandler.swift */,
-				FB4FF2921B7C472500504493 /* SleepLog.swift */,
-				FB2D41CB1B7A7F9000467132 /* Storyboards */,
+				FB2D41CB1B7A7F9000467132 /* Views */,
+				FB1B33B81B83A43300D8E9F0 /* Models */,
+				FB1B33BA1B83A44000D8E9F0 /* Controllers */,
+				FB1B33B91B83A43A00D8E9F0 /* Handlers */,
+				FB1B33B71B83A41C00D8E9F0 /* Custom Components */,
 				FB2D41CA1B7A7F8600467132 /* Stuff */,
-				FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */,
-				FB4FF28E1B7BE41300504493 /* UIColorExtension.swift */,
-				FB02623E1B7D3A4F007B1A43 /* NSDateExtension.swift */,
 			);
 			path = SleepStats;
 			sourceTree = "<group>";
@@ -256,12 +291,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB51F1CB1B76F59E000A7BC6 /* SecondViewController.swift in Sources */,
+				FB51F1CB1B76F59E000A7BC6 /* RecentViewController.swift in Sources */,
 				FB4FF2911B7C465D00504493 /* SoundHandler.swift in Sources */,
 				FB4FF28F1B7BE41300504493 /* UIColorExtension.swift in Sources */,
 				FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */,
 				FB2D41CD1B7A85F000467132 /* AlarmHandler.swift in Sources */,
 				FB4FF28B1B7BB64E00504493 /* NotificationHandler.swift in Sources */,
+				FB1B33B61B83A3FE00D8E9F0 /* RecentTableViewCell.swift in Sources */,
 				FB4FF2931B7C472500504493 /* SleepLog.swift in Sources */,
 				FB7788961B7A728100A95EB0 /* ColoredDatePicker.swift in Sources */,
 				FB51F1C91B76F59E000A7BC6 /* SleepViewController.swift in Sources */,
