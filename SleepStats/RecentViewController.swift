@@ -55,14 +55,24 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! RecentTableViewCell
 
         let object = sleepLogs[indexPath.row]
-        cell.textLabel?.text = object.humanReadableAlarmTime
-        cell.detailTextLabel?.text = String(object.wokeUpTime)
+        cell.textLabel?.text = "Date: \(object.startTime.humanReadableDate())"
+        cell.detailTextLabel?.text = "Sleep: \(object.startTime.humanReadableTime()) Wake: \(String(object.wokeUpTime.humanReadableTime()))"
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        print("You selected cell #\(indexPath.row)!")
     }
 
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            // todo: handle delete (by removing the data from your array and updating the tableview)
+        }
+    }
+    
 }

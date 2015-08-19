@@ -82,20 +82,14 @@ class SleepLog : Object, NSCoding {
         }
     }
     
-    var humanReadableAlarmTime : String {
+    var nextAlarmTime : String {
         var nextTime = self.alarmDate
         
         if self.hasSnoozed {
             nextTime = self.snoozeDate
         }
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        
-        let formattedDate = dateFormatter.stringFromDate(nextTime)
-        
-        return formattedDate
+        return nextTime.humanReadableTime()
     }
     
     // MARK: Initializers

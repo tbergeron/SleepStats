@@ -19,4 +19,24 @@ extension NSDate
         return updatedDate
     }
     
+    func humanReadableTime() -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        
+        let formattedDate = dateFormatter.stringFromDate(self)
+        
+        return formattedDate
+    }
+    
+    func humanReadableDate() -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        
+        let formattedDate = dateFormatter.stringFromDate(self)
+        
+        return formattedDate
+    }
+    
 }

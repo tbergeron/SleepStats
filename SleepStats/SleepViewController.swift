@@ -66,7 +66,7 @@ class SleepViewController: UIViewController {
             // switching labels
             if enabled {
                 if let sleepLog = self.alarmHandler.getCurrentSleepLog() {
-                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.humanReadableAlarmTime)"
+                    topLabel.text = "Good night!\nAlarm is set for \(sleepLog.nextAlarmTime)"
                 }
                 
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
