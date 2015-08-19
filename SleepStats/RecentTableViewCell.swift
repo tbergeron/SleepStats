@@ -9,10 +9,10 @@
 import UIKit
 
 class RecentTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var sleepLabel: UILabel!
-    @IBOutlet weak var alarmLabel: UILabel!
-    @IBOutlet weak var wokeUpLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

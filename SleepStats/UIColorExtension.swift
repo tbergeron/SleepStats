@@ -18,4 +18,5 @@ extension UIColor
         
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
+
 }

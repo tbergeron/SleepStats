@@ -27,6 +27,10 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // making uitableview transparent so view color appears behind
+        tableView.backgroundView = nil
+        tableView.backgroundColor = UIColor.clearColor()
+
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
         }
@@ -42,6 +46,10 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
 
     // MARK: UITableView Methods
     
@@ -52,11 +60,13 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recentCell", forIndexPath: indexPath) as! RecentTableViewCell
         
+        // todo: group them by month eventually
+        
         let object = sleepLogs[indexPath.row]
-        cell.sleepLabel?.text = "Sleep: \(object.startTime.humanReadableTime())"
-        cell.alarmLabel?.text = "Alarm: \(object.alarmTime.humanReadableTime())"
-        cell.wokeUpLabel?.text = "Woke up: \(object.wokeUpTime.humanReadableTime())"
-        cell.durationLabel?.text = "Duration: \(object.humanReadableDuration)"
+        
+        cell.dateLabel?.text = object.startTime.humanReadableDate()
+        cell.sleepLabel?.text = object.startTime.humanReadableTime()
+        cell.durationLabel?.text = object.humanReadableDuration
 
         return cell
     }
@@ -71,7 +81,14 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // todo: handle delete (by removing the data from your array and updating the tableview)
+            let object = sleepLogs[indexPath.row]
+
+            self.realm.write {
+                self.realm.delete(object)
+            }
+            
+            // todo: animate deletion
+            self.tableView.reloadData()
         }
     }
     

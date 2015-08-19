@@ -75,8 +75,8 @@ class SleepLog : Object, NSCoding {
     
     var humanReadableDuration : String {
         get {
-            let (h,m,s) = self.durationInt.secondsToHoursMinutesSeconds()
-            return String(format:"%d:%02d:%02d", h, m, s)
+            let (h,m,_) = self.durationInt.secondsToHoursMinutesSeconds()
+            return String(format:"%dh %02d min", h, m)
         }
     }
     

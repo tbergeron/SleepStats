@@ -31,8 +31,9 @@ extension NSDate
     
     func humanReadableDate() -> String {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        
+        // i.e. Tue, Aug 18
+        dateFormatter.dateFormat = "E, MMM dd"
         
         let formattedDate = dateFormatter.stringFromDate(self)
         

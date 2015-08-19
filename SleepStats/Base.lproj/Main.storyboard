@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Sleep-->
+        <!--Alarm-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="SleepViewController" customModule="SleepStats" customModuleProvider="target" sceneMemberID="viewController">
@@ -75,7 +75,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sleep" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Alarm" image="alarm_clock" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="alarmPicker" destination="Gep-ZL-vLi" id="mMB-DV-zba"/>
                         <outlet property="sleepButton" destination="KBh-fu-OxZ" id="lIz-qV-9za"/>
@@ -86,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
         </scene>
-        <!--Recent View Controller-->
+        <!--Recents-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="RecentViewController" customModule="SleepStats" customModuleProvider="target" sceneMemberID="viewController">
@@ -98,75 +98,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ehn-U3-79A">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ehn-U3-79A">
                                 <rect key="frame" x="0.0" y="28" width="600" height="572"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="recentCell" rowHeight="120" id="3wO-pw-YwF" customClass="RecentTableViewCell" customModule="SleepStats" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="120"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="recentCell" rowHeight="80" id="3wO-pw-YwF" customClass="RecentTableViewCell" customModule="SleepStats" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3wO-pw-YwF" id="y4l-Kc-deI">
-                                            <rect key="frame" x="0.0" y="0.0" width="553" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="553" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woke up:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikm-Af-ib6">
-                                                    <rect key="frame" x="13" y="78" width="527" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVx-vi-D9P">
+                                                    <rect key="frame" x="20" y="12" width="35" height="20"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.97254901960784312" green="0.74509803921568629" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sleep:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpq-Bt-pl3">
-                                                    <rect key="frame" x="13" y="20" width="527" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0h 00min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pM-Ta-KdF">
+                                                    <rect key="frame" x="452" y="43" width="73" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jD-mg-zIt">
-                                                    <rect key="frame" x="13" y="49" width="527" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 AM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpq-Bt-pl3">
+                                                    <rect key="frame" x="20" y="43" width="76" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pM-Ta-KdF">
-                                                    <rect key="frame" x="168" y="49" width="372" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="1jD-mg-zIt" firstAttribute="top" secondItem="wpq-Bt-pl3" secondAttribute="bottom" constant="8" id="0Yl-M5-c5b"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Ikm-Af-ib6" secondAttribute="trailing" constant="5" id="8QN-oZ-oRj"/>
-                                                <constraint firstItem="1jD-mg-zIt" firstAttribute="centerY" secondItem="y4l-Kc-deI" secondAttribute="centerY" id="8ds-yf-Rlo"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="1jD-mg-zIt" secondAttribute="trailing" constant="5" id="DDn-Ah-8we"/>
-                                                <constraint firstItem="1jD-mg-zIt" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="5" id="H2r-fO-0oM"/>
-                                                <constraint firstItem="0pM-Ta-KdF" firstAttribute="centerY" secondItem="y4l-Kc-deI" secondAttribute="centerY" id="Zz0-bZ-76h"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Ikm-Af-ib6" secondAttribute="bottom" constant="12" id="bnN-aB-VZx"/>
-                                                <constraint firstItem="wpq-Bt-pl3" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="5" id="cBj-C2-icy"/>
-                                                <constraint firstItem="0pM-Ta-KdF" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="160" id="iHd-0J-HCB"/>
-                                                <constraint firstItem="Ikm-Af-ib6" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="5" id="lNp-OK-UOS"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wpq-Bt-pl3" secondAttribute="trailing" constant="5" id="ljD-9C-2wm"/>
-                                                <constraint firstItem="wpq-Bt-pl3" firstAttribute="top" secondItem="y4l-Kc-deI" secondAttribute="topMargin" constant="12" id="rNX-Wn-LEa"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="0pM-Ta-KdF" secondAttribute="trailing" constant="5" id="w72-qA-pxP"/>
+                                                <constraint firstItem="eVx-vi-D9P" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="12" id="4Ln-Mh-RjK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0pM-Ta-KdF" secondAttribute="bottom" constant="7" id="8be-XZ-VmU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0pM-Ta-KdF" secondAttribute="trailing" constant="20" id="JQh-Kp-Uhe"/>
+                                                <constraint firstItem="wpq-Bt-pl3" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="12" id="Lol-di-SzB"/>
+                                                <constraint firstItem="0pM-Ta-KdF" firstAttribute="leading" secondItem="y4l-Kc-deI" secondAttribute="leadingMargin" constant="109" id="QcI-kA-zPa"/>
+                                                <constraint firstItem="eVx-vi-D9P" firstAttribute="top" secondItem="y4l-Kc-deI" secondAttribute="topMargin" constant="4" id="mFP-bH-d8t"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wpq-Bt-pl3" secondAttribute="bottom" constant="7" id="xEY-do-9fP"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="0Yl-M5-c5b"/>
+                                                    <exclude reference="QcI-kA-zPa"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="alarmLabel" destination="1jD-mg-zIt" id="4pr-O6-xhx"/>
+                                            <outlet property="dateLabel" destination="eVx-vi-D9P" id="OqQ-TZ-0KS"/>
                                             <outlet property="durationLabel" destination="0pM-Ta-KdF" id="pW8-io-jRB"/>
                                             <outlet property="sleepLabel" destination="wpq-Bt-pl3" id="BEw-75-Pl6"/>
-                                            <outlet property="wokeUpLabel" destination="Ikm-Af-ib6" id="cFd-tK-WC0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -177,7 +164,7 @@
                             </tableView>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ehn-U3-79A" secondAttribute="trailing" constant="-20" id="TdI-1f-DYp"/>
                             <constraint firstItem="ehn-U3-79A" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="W1c-v0-030"/>
@@ -186,7 +173,7 @@
                             <constraint firstItem="ehn-U3-79A" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="28" id="sfg-ud-vea"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Recents" image="list" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="tableView" destination="ehn-U3-79A" id="1lV-7M-k8f"/>
                     </connections>
@@ -217,6 +204,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="alarm_clock" width="31" height="31"/>
+        <image name="list" width="31" height="31"/>
     </resources>
 </document>
