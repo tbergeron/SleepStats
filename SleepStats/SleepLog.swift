@@ -133,14 +133,14 @@ class SleepLog : Object, NSCoding {
     // MARK: Model Methods
     
     func userWokeUp() {
+        self.wokeUpTime = NSDate()
+        
         // saving duration based on snooze/alarm time
         if self.hasSnoozed {
             self.duration = NSInteger(self.snoozeDate.timeIntervalSinceDate(self.startDate))
         } else {
-            self.duration = NSInteger(self.alarmDate.timeIntervalSinceDate(self.startDate))
-            
+            self.duration = NSInteger(self.wokeUpTime.timeIntervalSinceDate(self.startDate))
         }
-        self.wokeUpTime = NSDate()
     }
     
     func userSnoozed(newDate: NSDate) {
