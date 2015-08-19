@@ -83,12 +83,12 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             let object = sleepLogs[indexPath.row]
 
+            // remove object from db
             self.realm.write {
                 self.realm.delete(object)
+                // animate deletion
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
-            
-            // todo: animate deletion
-            self.tableView.reloadData()
         }
     }
     

@@ -70,9 +70,6 @@ class SleepViewController: UIViewController {
                 
                 sleepButton.setTitle("I'm up!", forState: UIControlState.Normal)
                 alarmPicker.hidden = true
-                
-                // todo: fade background?
-                // self.view.backgroundColor = UIColor(red: 0, green: 64, blue: 128)
             } else {
                 topLabel.text = "Don't forget to set your alarm!"
                 sleepButton.setTitle("Go to sleep...", forState: UIControlState.Normal)

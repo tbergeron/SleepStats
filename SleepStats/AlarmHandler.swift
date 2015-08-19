@@ -135,7 +135,7 @@ class AlarmHandler : NSObject {
             // adding 15 minutes to current alarm
             // todo: option for snooze delay? 15/30mins etc
             let components: NSDateComponents = NSDateComponents()
-            components.setValue(1, forComponent: NSCalendarUnit.Minute);
+            components.setValue(15, forComponent: NSCalendarUnit.Minute);
             
             let newAlarmDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: currentAlarmDate, options: NSCalendarOptions(rawValue: 0))!
             
