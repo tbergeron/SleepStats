@@ -26,8 +26,6 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.registerClass(RecentTableViewCell.self, forCellReuseIdentifier: "cell")
         
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
@@ -52,12 +50,14 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! RecentTableViewCell
-
-        let object = sleepLogs[indexPath.row]
-        cell.textLabel?.text = "Date: \(object.startTime.humanReadableDate())"
-        cell.detailTextLabel?.text = "Sleep: \(object.startTime.humanReadableTime()) Wake: \(String(object.wokeUpTime.humanReadableTime()))"
+        let cell = tableView.dequeueReusableCellWithIdentifier("recentCell", forIndexPath: indexPath) as! RecentTableViewCell
         
+        let object = sleepLogs[indexPath.row]
+        cell.sleepLabel?.text = "Sleep: \(object.startTime.humanReadableTime())"
+        cell.alarmLabel?.text = "Alarm: \(object.alarmTime.humanReadableTime())"
+        cell.wokeUpLabel?.text = "Woke up: \(object.wokeUpTime.humanReadableTime())"
+        cell.durationLabel?.text = "Duration: \(object.humanReadableDuration)"
+
         return cell
     }
     

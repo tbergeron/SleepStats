@@ -73,6 +73,13 @@ class SleepLog : Object, NSCoding {
         }
     }
     
+    var humanReadableDuration : String {
+        get {
+            let (h,m,s) = self.durationInt.secondsToHoursMinutesSeconds()
+            return String(format:"%d:%02d:%02d", h, m, s)
+        }
+    }
+    
     var wokeUpTime : NSDate {
         get {
             return self.wokeUpDate

@@ -9,11 +9,18 @@
 import UIKit
 
 class RecentTableViewCell: UITableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
-        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+    @IBOutlet weak var sleepLabel: UILabel!
+    @IBOutlet weak var alarmLabel: UILabel!
+    @IBOutlet weak var wokeUpLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
     }
     
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
     }
+
 }

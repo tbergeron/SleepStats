@@ -23,6 +23,7 @@
 		FB51F1D01B76F59E000A7BC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB51F1CF1B76F59E000A7BC6 /* Assets.xcassets */; };
 		FB51F1D31B76F59E000A7BC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB51F1D11B76F59E000A7BC6 /* LaunchScreen.storyboard */; };
 		FB7788961B7A728100A95EB0 /* ColoredDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */; };
+		FB8A46181B84F57400B5110E /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A46171B84F57400B5110E /* IntExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		FB51F1D21B76F59E000A7BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB51F1D41B76F59E000A7BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredDatePicker.swift; sourceTree = "<group>"; };
+		FB8A46171B84F57400B5110E /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +83,11 @@
 		FB1B33B71B83A41C00D8E9F0 /* Custom Components */ = {
 			isa = PBXGroup;
 			children = (
+				FB1B33B51B83A3FE00D8E9F0 /* RecentTableViewCell.swift */,
 				FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */,
 				FB4FF28E1B7BE41300504493 /* UIColorExtension.swift */,
 				FB02623E1B7D3A4F007B1A43 /* NSDateExtension.swift */,
-				FB1B33B51B83A3FE00D8E9F0 /* RecentTableViewCell.swift */,
+				FB8A46171B84F57400B5110E /* IntExtension.swift */,
 			);
 			name = "Custom Components";
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				FB4FF28F1B7BE41300504493 /* UIColorExtension.swift in Sources */,
 				FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */,
 				FB2D41CD1B7A85F000467132 /* AlarmHandler.swift in Sources */,
+				FB8A46181B84F57400B5110E /* IntExtension.swift in Sources */,
 				FB4FF28B1B7BB64E00504493 /* NotificationHandler.swift in Sources */,
 				FB1B33B61B83A3FE00D8E9F0 /* RecentTableViewCell.swift in Sources */,
 				FB4FF2931B7C472500504493 /* SleepLog.swift in Sources */,
