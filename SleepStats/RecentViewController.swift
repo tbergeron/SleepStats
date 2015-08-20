@@ -31,16 +31,17 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // todo: put colors somewhere
         tableView.backgroundColor = UIColor(hex: 0x14182B)
+        tableView.separatorColor = UIColor(hex: 0x475D73)
 
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
-            self.tableView.reloadData()
+            self.refreshView()
         }
         
-        tableView.reloadData()
+        self.refreshView()
     }
     
     override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
+        self.refreshView()
         super.viewWillAppear(animated)
     }
     
@@ -67,6 +68,7 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.dateLabel?.text = object.startTime.humanReadableDate()
         cell.sleepLabel?.text = object.startTime.humanReadableTime()
+        cell.wokeUpLabel?.text = object.wokeUpTime.humanReadableTime()
         cell.durationLabel?.text = object.humanReadableDuration
 
         return cell
@@ -91,6 +93,14 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
         }
+    }
+    
+    // MARK: Class Methods
+    
+    func refreshView() {
+        tableView.reloadData()
+        self.trackedNightsLabel.text = String(self.sleepLogs.count)
+        self.avgDurationLabel.text = SleepLogRepository.getAvgHours(self.sleepLogs)
     }
     
 }

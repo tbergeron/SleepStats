@@ -13,6 +13,7 @@ class RecentTableViewCell: UITableViewCell {
     @IBOutlet weak var sleepLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var wokeUpLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
