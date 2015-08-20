@@ -24,6 +24,7 @@
 		FB51F1D31B76F59E000A7BC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB51F1D11B76F59E000A7BC6 /* LaunchScreen.storyboard */; };
 		FB7788961B7A728100A95EB0 /* ColoredDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */; };
 		FB8A46181B84F57400B5110E /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A46171B84F57400B5110E /* IntExtension.swift */; };
+		FBFD6C641B866C4C00F9F86D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFD6C631B866C4C00F9F86D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		FB51F1D41B76F59E000A7BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredDatePicker.swift; sourceTree = "<group>"; };
 		FB8A46171B84F57400B5110E /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		FBFD6C631B866C4C00F9F86D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		FB1B33B71B83A41C00D8E9F0 /* Custom Components */ = {
 			isa = PBXGroup;
 			children = (
+				FBFD6C631B866C4C00F9F86D /* TabBarController.swift */,
 				FB1B33B51B83A3FE00D8E9F0 /* RecentTableViewCell.swift */,
 				FB7788951B7A728100A95EB0 /* ColoredDatePicker.swift */,
 				FB4FF28E1B7BE41300504493 /* UIColorExtension.swift */,
@@ -297,6 +300,7 @@
 				FB51F1CB1B76F59E000A7BC6 /* RecentViewController.swift in Sources */,
 				FB4FF2911B7C465D00504493 /* SoundHandler.swift in Sources */,
 				FB4FF28F1B7BE41300504493 /* UIColorExtension.swift in Sources */,
+				FBFD6C641B866C4C00F9F86D /* TabBarController.swift in Sources */,
 				FB51F1C71B76F59E000A7BC6 /* AppDelegate.swift in Sources */,
 				FB2D41CD1B7A85F000467132 /* AlarmHandler.swift in Sources */,
 				FB8A46181B84F57400B5110E /* IntExtension.swift in Sources */,
@@ -421,6 +425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SleepStats/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Brainpad.SleepStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,6 +439,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SleepStats/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Brainpad.SleepStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -15,6 +15,8 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: Outlets & Actions
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var trackedNightsLabel: UILabel!
+    @IBOutlet weak var avgDurationLabel: UILabel!
     
     // MARK: Properties
 
@@ -27,9 +29,8 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // making uitableview transparent so view color appears behind
-        tableView.backgroundView = nil
-        tableView.backgroundColor = UIColor.clearColor()
+        // todo: put colors somewhere
+        tableView.backgroundColor = UIColor(hex: 0x14182B)
 
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
