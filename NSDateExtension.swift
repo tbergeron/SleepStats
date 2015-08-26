@@ -10,13 +10,18 @@ import Foundation
 
 extension NSDate
 {
-
+    
     func flatSeconds() -> NSDate {
         var updatedDate = self
         let timeInterval = floor(updatedDate .timeIntervalSinceReferenceDate / 60.0) * 60.0
         updatedDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)
         
         return updatedDate
+    }
+    
+    func setTimeToMidnight() -> NSDate {
+        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        return cal!.dateBySettingHour(0, minute: 0, second: 0, ofDate: self, options: NSCalendarOptions())!
     }
     
     func humanReadableTime() -> String {

@@ -75,11 +75,10 @@ class SleepViewController: UIViewController {
                 sleepButton.setTitle("Go to sleep...", forState: UIControlState.Normal)
                 alarmPicker.hidden = false
                 
-                // now + 5 mins
-                let components: NSDateComponents = NSDateComponents()
-                components.setValue(5, forComponent: NSCalendarUnit.Minute);
-                let pickerDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))!
-                alarmPicker.setDate(pickerDate, animated: false)
+                if let lastAlarmTime = SleepLogRepository.getLastAlarmTimeForToday() {
+                    // setting last alarm time
+                    alarmPicker.setDate(lastAlarmTime, animated: false)
+                }
             }
         }
     }

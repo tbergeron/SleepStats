@@ -30,6 +30,22 @@ class SleepLog : Object, NSCoding {
     
     var startTime : NSDate {
         get {
+            // from: flat it out to startDate 12:00:00
+            let dateWithMidnight = self.startDate.setTimeToMidnight()
+            
+            // to: use from + 5 hours
+            let components: NSDateComponents = NSDateComponents()
+            components.setValue(5, forComponent: NSCalendarUnit.Hour);
+
+            let datePlusFiveHours = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: dateWithMidnight, options: NSCalendarOptions(rawValue: 0))!
+            
+            // If startDate <=> (from)00:00-(to)05:00; startDate = -1 day
+            if dateWithMidnight.compare(self.startDate) == .OrderedAscending && datePlusFiveHours.compare(self.startDate) == .OrderedDescending {
+                let components: NSDateComponents = NSDateComponents()
+                components.setValue(-1, forComponent: NSCalendarUnit.Day);
+                return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: self.startDate, options: NSCalendarOptions(rawValue: 0))!
+            }
+            
             return self.startDate
         }
         set(date) {

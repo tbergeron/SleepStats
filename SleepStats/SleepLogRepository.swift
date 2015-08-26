@@ -26,6 +26,24 @@ class SleepLogRepository {
         
         let (h,m,_) = totalSeconds.secondsToHoursMinutesSeconds()
         return String(format:"%dh %02d min", h, m)
-   }
+    }
+    
+    static func getLastAlarmTimeForToday() -> NSDate? {
+        let alarmHandler = AlarmHandler()
+        if let lastSleepLog = alarmHandler.getCurrentSleepLog() {
+            // keeping hh:mm
+            let lastAlarmTime = lastSleepLog.alarmTime
+            let hours = NSCalendar.currentCalendar().component(NSCalendarUnit.Hour, fromDate: lastAlarmTime)
+            let minutes = NSCalendar.currentCalendar().component(NSCalendarUnit.Minute, fromDate: lastAlarmTime)
+
+            // creating new date object with same time for today
+            let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+            let result = cal!.dateBySettingHour(hours, minute: minutes, second: 0, ofDate: NSDate(), options: NSCalendarOptions())!
+            
+            return result
+        }
+        
+        return nil
+    }
     
 }
