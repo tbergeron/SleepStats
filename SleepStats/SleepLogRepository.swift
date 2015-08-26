@@ -12,7 +12,7 @@ import RealmSwift
 
 class SleepLogRepository {
     
-    static func getAvgHours(results: Results<SleepLog>) -> String {
+    static func getAvgSleepHours(results: Results<SleepLog>) -> String {
         var totalSeconds = 0
         
         // adding all seconds
@@ -26,6 +26,14 @@ class SleepLogRepository {
         
         let (h,m,_) = totalSeconds.secondsToHoursMinutesSeconds()
         return String(format:"%dh %02d min", h, m)
+    }
+    
+    static func getAvgTime(results: Results<SleepLog>, useWokeUpTime: Bool) -> String {
+        // use wokeUpTime instead of startTime
+        if (useWokeUpTime) {
+            
+        }
+        
     }
     
     static func getLastAlarmTimeForToday() -> NSDate? {

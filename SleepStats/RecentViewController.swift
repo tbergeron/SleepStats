@@ -103,7 +103,10 @@ class RecentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func refreshView() {
         tableView.reloadData()
         self.trackedNightsLabel.text = String(self.sleepLogs.count)
-        self.avgDurationLabel.text = SleepLogRepository.getAvgHours(self.sleepLogs)
+        self.avgDurationLabel.text = SleepLogRepository.getAvgSleepHours(self.sleepLogs)
+        
+        let avgStartTime = SleepLogRepository.getAvgStartTime(self.sleepLogs)
+        print(avgStartTime)
     }
     
 }
